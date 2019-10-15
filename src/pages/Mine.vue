@@ -211,7 +211,7 @@ export default {
     background: #fff;
     margin-top: 8px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     text-align: center;
     padding: 4px 0px;
