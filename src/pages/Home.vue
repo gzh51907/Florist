@@ -176,6 +176,7 @@ h3 img{
    border: 1px solid #e5e5e5;
    margin-bottom: 12px;
    flex-direction: column;
+   background: #fff;
  }
  .title{
    width: 100%;
