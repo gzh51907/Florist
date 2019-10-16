@@ -20,7 +20,7 @@ Router.use((req, res, next) => {
 })
 
 // 引入每个模块路由
-const goodsRouter = require('./goods');
+// const goodsRouter = require('./goods');
 const userRouter = require('./user');
 // const cartsRouter = require('./carts');
 
@@ -29,8 +29,9 @@ Router.use(express.urlencoded({
     extended: true
 }), express.json());
 
-Router.use('/goods', goodsRouter);
+// Router.use('/goods', goodsRouter);
 Router.use('/user', userRouter);
+// Router.use('/carts', cartsRouter);
 
 // 检验前端token
 Router.get('/verify', (req, res) => {
@@ -38,7 +39,6 @@ Router.get('/verify', (req, res) => {
 
     // 校验token有效性
     let result = token.verify(Authorization);
-
     res.send(formatData({
         code: result ? 1 : 0
     }))

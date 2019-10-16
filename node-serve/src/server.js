@@ -12,5 +12,5 @@ app.use(express.static('./'));
 app.use(allRouter);
 
 app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`);
+    console.log(`服务器运行，端口号是 ${PORT}`);
 })
