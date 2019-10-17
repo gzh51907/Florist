@@ -5,10 +5,36 @@
             <input type="seach" placeholder="请输入鲜花名称/关键字">
       </div>
     </el-header>
-  <el-container>
-    <el-aside width="90px"></el-aside>
-    <el-main></el-main>
-  </el-container>
+  <el-main>
+    <el-aside width='100%'>
+      <el-tabs :tab-position="tabPosition" style="height: 508px">
+    <el-tab-pane label="花品">
+          <img src="../assets/fen1.png" alt="">
+          <div class="con">
+            <a href="">
+              <img src="../assets/m_c.png" alt="">
+              <p>送女友鲜花</p>
+            </a>
+             <a href="">
+              <img src="../assets/m_c.png" alt="">
+              <p>送女友鲜花</p>
+            </a>
+             <a href="">
+              <img src="../assets/m_c.png" alt="">
+              <p>送女友鲜花</p>
+            </a>
+              <a href="">
+              <img src="../assets/m_c.png" alt="">
+              <p>送女友鲜花</p>
+            </a>
+          </div>
+    </el-tab-pane>
+    <el-tab-pane label="对象">花</el-tab-pane>
+    <el-tab-pane label="色彩">品</el-tab-pane>
+    <el-tab-pane label="场景">花品</el-tab-pane>
+  </el-tabs>
+    </el-aside>
+  </el-main>
 </el-container>
 </template>
 <script>
@@ -16,6 +42,7 @@ export default {
     name:'Classify',
     data(){
       return{
+           tabPosition: 'left'
       }
     }
 }
@@ -31,6 +58,7 @@ export default {
     padding: 6px 12px;
     line-height: 0;
     border-bottom: 1px solid  rgb(237, 237, 237);
+    z-index: 9;
       .seach{
         width: 100%;
           input{
@@ -48,12 +76,41 @@ export default {
         }
 }
 .el-aside{
-   background-color: rgb(237, 237, 237);
+  background: #ffffff;
+  //  background-color: rgb(237, 237, 237);
+   padding-top: 45px;
 }
 .el-main{
-  background-color: #fff;
-}
-.el-container{
   height: 553px;
+  padding: 0;
+} 
+.el-tab-pane{
+  // background: #ffffff;
+  height: 508px;
+  padding-right: 10px;
+  padding-top: 10px; 
+    img{
+      width: 100%
+  }
+  .con{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    a{
+      display: block;
+      width: 33%;
+      text-align: center;
+      padding: 10px 0;
+      color: #232323;
+      img{
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        margin-bottom: 5px;
+      }
+    }
+  }
 }
+
+
 </style>

@@ -7,6 +7,7 @@ import Home from '../pages/Home.vue';
 import Cart from '../pages/Cart.vue';
 import Classify from '../pages/Classify.vue';
 import Mine from '../pages/Mine.vue';
+import Reg from '../pages/Reg.vue';
 let router = new VueRouter({
     routes: [{
             name: 'home',
@@ -34,6 +35,10 @@ let router = new VueRouter({
             path: "/mine",
             component: Mine,
 
+        },
+        {
+            path: '/reg',
+            component: Reg
         }
     ]
 })

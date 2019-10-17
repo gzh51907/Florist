@@ -1,6 +1,5 @@
 <template> 
 <div>
-
  <div class="footer">  <el-row>
   <el-col :span="6"  v-for="item in menus" :key="item.name">
        <router-link :to="item.path" active-class="current">
@@ -14,6 +13,7 @@
 
 </template>
 <script>
+import { METHODS } from 'http'
 export default {
   name: 'app',
  data(){
@@ -46,7 +46,8 @@ export default {
        }
      ]
    }
- }
+ },
+ 
 }
 </script>
 <style lang="scss">
