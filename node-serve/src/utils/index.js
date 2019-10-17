@@ -1,5 +1,6 @@
 const token = require('./token')
 
+// 规范化返回数据
 function formatData({
     code = 1,
     msg = 'success',
