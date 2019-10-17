@@ -9,7 +9,7 @@
   </el-header>
   <el-main style="padding:0">
     <div class="m-top">
-      <div class="m1">
+      <div class="m1" @click="goto('./Reg')">
         <img src="../assets/yh.png" alt="">
         <div class="dl">您还没有登录</div>
       </div>
@@ -75,7 +75,10 @@ export default {
       return{
         
       }
-    }
+    },
+    methods:{
+            goto(path){this.$router.push(path);}
+            }      
 }
 </script>
 <style lang="scss" scoped>
@@ -211,7 +214,7 @@ export default {
     background: #fff;
     margin-top: 8px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     text-align: center;
     padding: 4px 0px;
