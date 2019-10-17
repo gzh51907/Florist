@@ -38,7 +38,7 @@ export default {
 
     // 校验用户名是否存在
     const checkUsername = async (rule, value, callback) => {
-      let {data} = await this.$axios.get('1',{
+      let {data} = await this.$axios.get('http://localhost:8080/#/Reg',{
         params:{
           username:this.ruleForm.username
         }
@@ -79,7 +79,7 @@ export default {
       methods:{
       submitForm() {
         //   校验整个表单
-        this.$refs.regForm.validate(async (valid) => {
+        this.$refs.ruleForm.validate(async (valid) => {
             // valid： 所有校验规则都通过后，得到true，只要有一个表单元素校验不通过则得到form
           if (valid) {
             // alert('submit!');
@@ -88,7 +88,7 @@ export default {
 
             let {username,password} = this.ruleForm
 
-            let {data} = await this.$axios.post('http://localhost:1907/user/reg',{
+            let {data} = await this.$axios.post('http://localhost:8080/#/Reg',{
               username,
               password
             });
@@ -97,7 +97,7 @@ export default {
             // this.$router.replace('/mine')
             if(data.code===1){
 
-              this.$router.replace({name:'mine',params:{username},query:{username}})
+              this.$router.replace({name:'Mine',params:{username},query:{username}})
               // this.$router.replace({path:'/mine',params:{username}})
             }else{
               alert('注册失败');
