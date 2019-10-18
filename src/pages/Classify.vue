@@ -6,19 +6,20 @@
       </div>
     </el-header>
     <el-main>
-      <el-aside width="100%">
-        <el-tabs :tab-position="tabPosition">
-          <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
-            <img :src="item[0].titleurl" />
-            <div class="con">
-              <a href v-for="item in item" :key="item.imgurl">
-                <img :src="item.imgurl" />
-                <p>{{item.class_name}}</p>
-              </a>
-            </div>
-          </el-tab-pane>
-        </el-tabs>
-      </el-aside>
+      <el-radio-group v-model="tabPosition">
+        <el-radio-button label="left">left</el-radio-button>
+      </el-radio-group>
+      <el-tabs :tab-position="tabPosition" height="400px">
+        <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
+          <img :src="item[0].titleurl" />
+          <div class="con">
+            <a href v-for="item in item" :key="item.imgurl">
+              <img :src="item.imgurl" />
+              <p>{{item.class_name}}</p>
+            </a>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </el-main>
   </el-container>
 </template>
@@ -83,38 +84,41 @@ export default {
     }
   }
 }
-.el-aside {
-  background: #ffffff;
-  //  background-color: rgb(237, 237, 237);
-  padding-top: 45px;
-}
+
 .el-main {
-  // height: 553px;
   padding: 0;
-}
-.el-tab-pane {
-  // background: #ffffff;
-  // height: 508px;
-  padding-right: 10px;
-  padding-top: 10px;
-  img {
-    width: 100%;
+  .el-tabs {
+    background: #ffffff;
+    .el-tabs__nav {
+      height: 13.888889rem;
+    }
   }
-  .con {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    a {
-      display: block;
-      width: 33%;
-      text-align: center;
-      padding: 10px 0;
-      color: #232323;
-      img {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        margin-bottom: 5px;
+  .el-tab-pane {
+    padding-right: 10px;
+    padding-top: 10px;
+    font-size: 0.152778rem;
+    img {
+      width: 100%;
+    }
+    .con {
+      // display: flex;
+      // justify-content: space-between;
+      // flex-wrap: wrap;
+      a {
+        display: block;
+        width: 33%;
+        text-align: center;
+        padding: 10px 0;
+        color: #232323;
+        font-size: 0.152778rem;
+        // flex: 1;
+        float: left;
+        img {
+          width: 0.833333rem;
+          height: 0.833333rem;
+          border-radius: 100%;
+          margin-bottom: 5px;
+        }
       }
     }
   }
