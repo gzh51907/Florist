@@ -75,7 +75,7 @@ export default {
     async getMainData(classify) {
       let {
         data: { data }
-      } = await this.$axios.post("http://localhost:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
         classify
       });
       return data;
@@ -141,8 +141,8 @@ h3 img {
   }
 }
 .contain {
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .w1 {
   font-size: 15px;
@@ -186,8 +186,8 @@ h3 img {
 }
 .flex-item {
   display: flex;
-  width: 48%;
-  height: 3.5rem;
+  width: 49%;
+  // height: 3.5rem;
   border: 1px solid #e5e5e5;
   margin-bottom: 12px;
   flex-direction: column;
@@ -195,7 +195,7 @@ h3 img {
 }
 .title {
   width: 100%;
-  height: 3rem;
+  height: 2.5rem;
   // background-size: contain;
   img {
     width: 100%;
@@ -206,9 +206,10 @@ h3 img {
 }
 .cont {
   padding: 0 16px;
+  // height: 1.666667rem;
   h2 {
-    line-height: 25px;
-    font-size: 15px;
+    line-height: 0.347222rem;
+    font-size: 0.15rem;
     color: #333333;
     margin: 0px;
     font-weight: normal;
@@ -220,8 +221,9 @@ h3 img {
     white-space: nowrap;
   }
   h3 {
-    line-height: 19px;
-    font-size: 14px;
+    line-height: 0.263889rem;
+    height: 0.263889rem;
+    font-size: 0.15rem;
     color: #999999;
     margin: 0px;
     font-weight: normal;
@@ -233,17 +235,18 @@ h3 img {
     -webkit-box-orient: vertical;
   }
   h4 {
-    line-height: 33px;
+    line-height: 0.458333rem;
     color: #df4d28;
-    font-size: 20px;
+    font-size: 0.2rem;
+    height: 0.458333rem;
     margin: 0px;
     font-weight: normal;
     border-top: 1px solid #f5f5f5;
     margin-top: 5px;
     font-weight: bold;
     span {
-      line-height: 33px;
-      font-size: 12px;
+      line-height: 0.458333rem;
+      font-size: 0.12rem;
       color: #646464;
       margin: 0px;
       font-weight: normal;
