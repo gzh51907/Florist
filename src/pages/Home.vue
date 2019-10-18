@@ -33,7 +33,6 @@
       </div>
       <div class="contain" v-for="item in allMainData" :key="item[1].goods_name">
         <h2 class="w1">{{item[1].classify}}</h2>
-        <a href class="w2"></a>
         <div class="flex-box">
           <div class="flex-item" v-for="item in item" :key="item.gid">
             <div class="title">
@@ -145,11 +144,13 @@ h3 img {
   padding-right: 5px;
 }
 .w1 {
-  font-size: 15px;
+  font-size: 0.138889rem;
   position: relative;
   text-align: center;
-  line-height: 27px;
-  // height: 0.277778rem;
+  line-height: 0.375rem;
+  height: 0.375rem;
+  color: #303030;
+  margin-bottom: 0.111111rem;
 }
 .w1::before {
   border-top: 2px solid #bfbfbf;
@@ -187,26 +188,24 @@ h3 img {
 .flex-item {
   display: flex;
   width: 49%;
-  // height: 3.5rem;
   border: 1px solid #e5e5e5;
   margin-bottom: 12px;
   flex-direction: column;
   background: #fff;
+  border-radius: 5px;
 }
 .title {
   width: 100%;
   height: 2.5rem;
-  // background-size: contain;
+  border-radius: 5px;
   img {
     width: 100%;
     height: 100%;
+    border-radius: 5px;
   }
-  // background-repeat: no-repeat;
-  // background-position: center;
 }
 .cont {
   padding: 0 16px;
-  // height: 1.666667rem;
   h2 {
     line-height: 0.347222rem;
     font-size: 0.15rem;

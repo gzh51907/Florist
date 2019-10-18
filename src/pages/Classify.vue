@@ -13,7 +13,7 @@
         <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
           <img :src="item[0].titleurl" />
           <div class="con">
-            <a href v-for="item in item" :key="item.imgurl">
+            <a href="#/list" v-for="item in item" :key="item.imgurl">
               <img :src="item.imgurl" />
               <p>{{item.class_name}}</p>
             </a>
@@ -101,9 +101,15 @@ export default {
       width: 100%;
     }
     .con {
-      // display: flex;
-      // justify-content: space-between;
-      // flex-wrap: wrap;
+      width: 100%;
+      &::after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
       a {
         display: block;
         width: 33%;
@@ -111,7 +117,6 @@ export default {
         padding: 10px 0;
         color: #232323;
         font-size: 0.152778rem;
-        // flex: 1;
         float: left;
         img {
           width: 0.833333rem;
