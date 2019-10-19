@@ -1,6 +1,10 @@
 <template>
 <div>
-<h2>注册</h2>
+ <el-header height="47px">
+       <div class="el-icon-arrow-left"></div>
+        <h3>注册</h3>  
+      <div class="nulld"></div>
+  </el-header>
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
     <el-form-item label="账号" prop="username">
     <el-input v-model.number="ruleForm.username"></el-input>
@@ -11,9 +15,12 @@
   <el-form-item label="确认密码" prop="checkPass">
     <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item class="aa1">
     <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
   </el-form-item>
+  <router-link :to=" '/login'">
+  <div class="login">账号密码登录></div>
+  </router-link>
 </el-form>
 </div>
 </template>
@@ -113,13 +120,39 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-h2{
-    margin-bottom: 50px;
-    text-align: center;
-    font-size: 25px;
-    padding-top: 10px;
+.el-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  border-bottom: 1px solid #bfbfbf;
+  margin-bottom: 50px;
+   h3{
+     line-height: 47px;
+     font-size: 18px;
+   }
+  
 }
+ .nulld{
+     width: 47px;
+     height: 47px;
+   }
+ .el-icon-arrow-left{
+     width: 47px;
+     height: 47px;
+     font-size: 22px;
+     text-align: center;
+     line-height: 47px;
+   }
 .el-input{
     width: 70%;
+}
+.aa1{
+ text-align: center;
+ padding-right: 100px;
+}
+.login{
+  font-size: 16px;
+  color: #bfbfbf;
+  margin-left: 10px;
 }
 </style>

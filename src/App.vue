@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="footer">
-      <el-row>
-        <el-col :span="6" v-for="item in menus" :key="item.name">
-          <router-link :to="item.path" active-class="current">
+      <el-row v-if="this.$route.path=='/home' | this.$route.path=='/cart' | this.$route.path=='/mine' |
+      $route.path=='/classify'">
+        <el-col :span="6" v-for="item in menus" :key="item.name" >
+          <router-link :to="item.path" active-class="current" >
             <div class="bg-purple" :class="item.icon"></div>
             <p>{{item.text}}</p>
           </router-link>
