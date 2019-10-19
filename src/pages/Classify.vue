@@ -1,116 +1,131 @@
 <template>
-<el-container>
-    <el-header height= "45px">
+  <el-container>
+    <el-header height="45px">
       <div class="seach">
-            <input type="seach" placeholder="请输入鲜花名称/关键字">
+        <input type="seach" placeholder="请输入鲜花名称/关键字" />
       </div>
     </el-header>
-  <el-main>
-    <el-aside width='100%'>
-      <el-tabs :tab-position="tabPosition" style="height: 508px">
-    <el-tab-pane label="花品">
-          <img src="../assets/fen1.png" alt="">
+    <el-main>
+      <el-radio-group v-model="tabPosition">
+        <el-radio-button label="left">left</el-radio-button>
+      </el-radio-group>
+      <el-tabs :tab-position="tabPosition" height="400px">
+        <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
+          <img :src="item[0].titleurl" />
           <div class="con">
-            <a href="">
-              <img src="../assets/m_c.png" alt="">
-              <p>送女友鲜花</p>
-            </a>
-             <a href="">
-              <img src="../assets/m_c.png" alt="">
-              <p>送女友鲜花</p>
-            </a>
-             <a href="">
-              <img src="../assets/m_c.png" alt="">
-              <p>送女友鲜花</p>
-            </a>
-              <a href="">
-              <img src="../assets/m_c.png" alt="">
-              <p>送女友鲜花</p>
+            <a href="#/list" v-for="item in item" :key="item.imgurl">
+              <img :src="item.imgurl" />
+              <p>{{item.class_name}}</p>
             </a>
           </div>
-    </el-tab-pane>
-    <el-tab-pane label="对象">花</el-tab-pane>
-    <el-tab-pane label="色彩">品</el-tab-pane>
-    <el-tab-pane label="场景">花品</el-tab-pane>
-  </el-tabs>
-    </el-aside>
-  </el-main>
-</el-container>
+        </el-tab-pane>
+      </el-tabs>
+    </el-main>
+  </el-container>
 </template>
 <script>
 export default {
-    name:'Classify',
-    data(){
-      return{
-           tabPosition: 'left'
-      }
+  name: "Classify",
+  data() {
+    return {
+      tabPosition: "left",
+      allClassData: {}
+    };
+  },
+  methods: {
+    async getMainData(type) {
+      let {
+        data: { data }
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
+        type
+      });
+      return data;
     }
-}
+  },
+  async created() {
+    let dataFresh = await this.getMainData("鲜花");
+    let dataForever = await this.getMainData("永生花");
+    let dataCake = await this.getMainData("蛋糕");
+    let dataSpe = await this.getMainData("特色礼品");
+    this.allClassData = {
+      dataFresh,
+      dataForever,
+      dataCake,
+      dataSpe
+    };
+  }
+};
 </script>
 <style lang="scss" scoped>
-.el-header{
+.el-header {
+  width: 100%;
+  background: #fff;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  padding: 6px 12px;
+  line-height: 0;
+  border-bottom: 1px solid rgb(237, 237, 237);
+  z-index: 9;
+  .seach {
     width: 100%;
-    background: #fff;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    display: flex;
-    padding: 6px 12px;
-    line-height: 0;
-    border-bottom: 1px solid  rgb(237, 237, 237);
-    z-index: 9;
-      .seach{
-        width: 100%;
-          input{
-            width: 100%;
-            height: 29px;
-            background: #ffffff url(../assets/seach.png) no-repeat 8px center;
-            background-size: 14px 15px;
-            padding-left: 30px;
-            box-sizing: border-box;
-            border: none;
-            border-radius: 5px;
-            font-size: 14px;
-            background-color: rgb(237, 237, 237);
-          }
-        }
-}
-.el-aside{
-  background: #ffffff;
-  //  background-color: rgb(237, 237, 237);
-   padding-top: 45px;
-}
-.el-main{
-  height: 553px;
-  padding: 0;
-} 
-.el-tab-pane{
-  // background: #ffffff;
-  height: 508px;
-  padding-right: 10px;
-  padding-top: 10px; 
-    img{
-      width: 100%
-  }
-  .con{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    a{
-      display: block;
-      width: 33%;
-      text-align: center;
-      padding: 10px 0;
-      color: #232323;
-      img{
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        margin-bottom: 5px;
-      }
+    input {
+      width: 100%;
+      height: 29px;
+      background: #ffffff url(../assets/seach.png) no-repeat 8px center;
+      background-size: 14px 15px;
+      padding-left: 30px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      background-color: rgb(237, 237, 237);
     }
   }
 }
 
-
+.el-main {
+  padding: 0;
+  .el-tabs {
+    background: #ffffff;
+    .el-tabs__nav {
+      height: 13.888889rem;
+    }
+  }
+  .el-tab-pane {
+    padding-right: 10px;
+    padding-top: 10px;
+    font-size: 0.152778rem;
+    img {
+      width: 100%;
+    }
+    .con {
+      width: 100%;
+      &::after {
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+      }
+      a {
+        display: block;
+        width: 33%;
+        text-align: center;
+        padding: 10px 0;
+        color: #232323;
+        font-size: 0.152778rem;
+        float: left;
+        img {
+          width: 0.833333rem;
+          height: 0.833333rem;
+          border-radius: 100%;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
 </style>

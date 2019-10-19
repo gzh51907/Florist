@@ -8,7 +8,11 @@ import Cart from '../pages/Cart.vue';
 import Classify from '../pages/Classify.vue';
 import Mine from '../pages/Mine.vue';
 import Reg from '../pages/Reg.vue';
+<<<<<<< HEAD
 import Login from '../pages/Login.vue';
+=======
+import List from '../pages/List.vue';
+>>>>>>> dev
 let router = new VueRouter({
     routes: [{
             name: 'home',
@@ -16,7 +20,6 @@ let router = new VueRouter({
             component: Home,
         },
         {
-
             path: '/',
             redirect: '/home',
         },
@@ -42,9 +45,16 @@ let router = new VueRouter({
             component: Reg
         },
         {
+<<<<<<< HEAD
             path: '/login',
             component: Login
         }
+=======
+            name: "list",
+            path: "/list",
+            component: List
+        },
+>>>>>>> dev
     ]
 })
 export default router;
