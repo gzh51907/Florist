@@ -10,6 +10,7 @@ import Mine from '../pages/Mine.vue';
 import Reg from '../pages/Reg.vue';
 import Login from '../pages/Login.vue';
 import List from '../pages/List.vue';
+import Detail from '../pages/Detail.vue';
 let router = new VueRouter({
     routes: [{
             name: 'home',
@@ -48,12 +49,18 @@ let router = new VueRouter({
         {
             path: '/login',
             component: Login
-        },
-        {
+        }, {
+
             name: "list",
             path: "/list",
             component: List
-        },
+        }, {
+
+            name: "detail",
+            path: "/detail",
+            component: Detail
+        }
+
     ]
 })
 
