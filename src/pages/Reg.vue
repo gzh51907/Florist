@@ -19,7 +19,7 @@
     <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
   </el-form-item>
   <router-link :to=" '/login'">
-  <div class="login">账号密码登录></div>
+  <div class="gologin">账号密码登录></div>
   </router-link>
 </el-form>
 </div>
@@ -150,7 +150,7 @@ export default {
  text-align: center;
  padding-right: 100px;
 }
-.login{
+.gologin{
   font-size: 16px;
   color: #bfbfbf;
   margin-left: 10px;
