@@ -1,174 +1,216 @@
 <template>
-      <el-container>
+  <el-container>
     <el-header height="45px">
-      <div class="el-icon-arrow-left">
-      </div>
-      <div class="el-icon-s-unfold">
-      </div>
+      <div class="el-icon-arrow-left" @click="goback"></div>
+      <h3>
+        <img src="../assets/logo_new.png" alt />
+      </h3>
+      <div class="el-icon-s-unfold"></div>
     </el-header>
     <el-main>
-        <div class="x1"><img src="../assets/go1.jpg" alt=""></div>
-        <div class="proinfo">
-              <div class="x2">
-                <div class="proinfo-head">
-                  <div class="proinfo-head-t">
-                    一往情深-精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎 
-                  </div>
-                  <span>经典爆款，年销售冠军！</span>
-                </div>    
-                <div class="proinfo-collect el-icon-star-off"></div>
-              </div>
-              <div class="x3">
-                <span>¥239</span>
-                <em>¥260</em>
-              </div>
+      <div class="x1">
+        <img src="../assets/go1.jpg" alt />
+      </div>
+      <div class="proinfo">
+        <div class="x2">
+          <div class="proinfo-head">
+            <div class="proinfo-head-t">一往情深-精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</div>
+            <span>经典爆款，年销售冠军！</span>
+          </div>
+          <div class="proinfo-collect el-icon-star-off"></div>
         </div>
-        <div class="lijian">APP下单立减5元</div>
-        <ul class="detailsinfo">
-          <li>
-            <div class="detailsinfo-l">花语</div>
-            <div class="detailsinfo-r">你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</div>
-          </li>
-          <li>
-            <div class="detailsinfo-l">花语</div>
-            <div class="detailsinfo-r">你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</div>
-          </li>
-          <li class="last">
-            <div class="detailsinfo-l">花语</div>
-            <div class="detailsinfo-r last" >你的轻柔像阵微风，让我从容不迫，想让你知道，我对你始终一往情深。</div>
-          </li>
-        </ul>
-        <div class="tabbar">
-          <a href="" id="addCart">
-            加入购物车
-          </a>
-          <a href="" id="soonBuy">立即购买</a>
+        <div class="x3">
+          <span>¥239</span>
+          <em>¥260</em>
         </div>
-        </el-main>
-    </el-container>
+      </div>
+      <div class="lijian">APP下单立减5元</div>
+      <ul class="detailsinfo">
+        <li>
+          <div class="detailsinfo-l">编号</div>
+          <div class="detailsinfo-r">gid</div>
+        </li>
+        <li>
+          <div class="detailsinfo-l">花材</div>
+          <div class="detailsinfo-r">info</div>
+        </li>
+        <li>
+          <div class="detailsinfo-l">包装</div>
+          <div class="detailsinfo-r">白色网纸内衬，不少于4张粉色雾面纸外包装</div>
+        </li>
+        <li class="last">
+          <div class="detailsinfo-l">配送</div>
+          <div class="detailsinfo-r last">送货上门（指定日期送鲜花、蛋糕上门）</div>
+        </li>
+      </ul>
+      <div class="tabbar">
+        <a href id="addCart">加入购物车</a>
+        <a href id="soonBuy">立即购买</a>
+      </div>
+    </el-main>
+  </el-container>
 </template>
 <script>
 export default {
-    
-}
+  methods: {
+    goback() {
+      let { targetUrl } = this.$route.query;
+      this.$router.push({
+        path: targetUrl
+      });
+    }
+  }
+};
 </script>
 <style lang="scss" scoped>
 .el-header {
+  // position: fixed;
   display: flex;
   justify-content: space-between;
-   line-height: .75rem;
-   .el-icon-arrow-left,.el-icon-s-unfold{
-     width: .5875rem;
-     height: .5875rem;
-     font-size:.275rem;
-     text-align: center;
-     line-height:.5875rem;
-   }
+  line-height: 40px;
+  height: 40px;
+  .el-icon-arrow-left,
+  .el-icon-s-unfold {
+    // margin-top: 5px;
+    width: 25px;
+    height: 25px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 44px;
+  }
+  h3 {
+    img {
+      height: 22px;
+      width: 113px;
+      margin-top: 10px;
+    }
+  }
 }
-.el-main{
+.el-main {
   padding: 0;
+  background: #f4f4f4;
 }
-.x1{
+.x1 {
   width: 5.0625rem;
-  img{
+  img {
     width: 100%;
     height: 5.0625rem;
   }
 }
-.proinfo{
-    padding: .175rem;
-    background: #fff;
-    margin-bottom: 1px;
-    border-bottom: 1px solid #E9ECF0;
-.x2{
+.proinfo {
+  padding: 0.175rem;
+  background: #fff;
+  margin-bottom: 1px;
+  border-bottom: 1px solid #e9ecf0;
+  .x2 {
     display: flex;
     justify-content: space-between;
-      flex-wrap: wrap;
-      .proinfo-head{     
-          width: 90%;
-          font-size: .175rem;
-          .proinfo-head-t{
-            display: inline-block;
-          }
-          span{
-            color: red;
-          }
+    flex-wrap: wrap;
+    .proinfo-head {
+      width: 90%;
+      .proinfo-head-t {
+        width: 100%;
+        font-size: 0.21rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      span {
+        color: red;
+        font-size: 0.14rem;
+      }
     }
-    .el-icon-star-off{
+    .el-icon-star-off {
       text-align: right;
-      font-size: .275rem;
+      font-size: 0.275rem;
     }
   }
 }
-.x3{
-  margin-top: .15rem;
-  span{
-    font-size: .1875rem;
+.x3 {
+  margin-top: 0.15rem;
+  span {
+    font-size: 0.24rem;
     color: red;
+    font-weight: bold;
   }
-  em{
-    font-size: .15rem;
-    color: #B4BABF;
-    margin-left: .125rem;
+  em {
+    font-size: 0.15rem;
+    color: #b4babf;
+    margin-left: 0.125rem;
     text-decoration: line-through;
   }
 }
-.lijian{
-  padding: .15rem;
-   background: #fff;
-   font-size: .1875rem;
-   text-align: center;
-   margin-bottom: .125rem;
+.lijian {
+  padding: 0.15rem;
+  background: #fff;
+  font-size: 0.1875rem;
+  text-align: center;
+  margin-bottom: 0.125rem;
 }
-.detailsinfo{
-  padding: .15rem;
-   background: #fff;
-    margin-bottom: .125rem;
-   li{
-     display: flex;
-     justify-content: space-between;
-     font-size: .15rem;
-     .detailsinfo-l{
-       padding: .15rem 0;
-       font-weight: 500;
-        color: #232323;
-        width: .5625rem;
-     }
-     .detailsinfo-r{
-      padding: .15rem 0;
-       border-bottom: 1px solid #E9ECF0;
-     }
-     .last{
-      border: none
+.detailsinfo {
+  padding: 0.15rem;
+  background: #fff;
+  margin-bottom: 0.125rem;
+  li {
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
     }
-   }
+    .detailsinfo-l {
+      float: left;
+      padding-top: 0.15rem;
+      padding-bottom: 10px;
+      font-weight: bold;
+      color: #232323;
+      width: 0.5625rem;
+      font-size: 0.194444rem;
+    }
+    .detailsinfo-r {
+      float: left;
+      padding-top: 0.18rem;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e9ecf0;
+      color: #666;
+      width: 3.555556rem;
+      font-size: 0.166667rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .last {
+      border: none;
+    }
+  }
 }
-.tabbar{
+.tabbar {
   display: flex;
-   background: #fff;
-   height: .65rem;
-   text-align: center;
-   position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9;
-#addCart{
-  display: block;
-  width: 50%;
-  line-height: .65rem;
-  font-size: .175rem;
-  color: #fff;
-  background-color: #3D4D42;
+  background: #fff;
+  height: 0.65rem;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  #addCart {
+    display: block;
+    width: 50%;
+    line-height: 0.65rem;
+    font-size: 0.175rem;
+    color: #fff;
+    background-color: #3d4d42;
+  }
+  #soonBuy {
+    display: block;
+    width: 50%;
+    line-height: 0.65rem;
+    font-size: 0.175rem;
+    color: #fff;
+    background-color: #ff734c;
+  }
 }
-#soonBuy{
-  display: block;
-  width: 50%;
-  line-height: .65rem;
-  font-size: .175rem;
-  color: #fff;
-  background-color: #FF734C;
-}
-}
-
 </style>

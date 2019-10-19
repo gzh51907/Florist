@@ -1,28 +1,35 @@
 <template>
-<div>
-<el-header height="47px">
-       <div class="el-icon-arrow-left"></div>
-        <h3>登录</h3>  
+  <div>
+    <el-header height="47px">
+      <div class="el-icon-arrow-left" @click="goback"></div>
+      <h3>登录</h3>
       <div class="nulld"></div>
-  </el-header>
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="账号" prop="username">
-    <el-input v-model.number="ruleForm.username"></el-input>
-  </el-form-item>
-  <el-form-item label="密码" prop="password">
-    <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-  </el-form-item>
-  <el-form-item>
+    </el-header>
+    <el-form
+      :model="ruleForm"
+      status-icon
+      :rules="rules"
+      ref="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="账号" prop="username">
+        <el-input v-model.number="ruleForm.username"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item>
         <el-checkbox label="下次免登陆" v-model="ruleForm.mdl"></el-checkbox>
       </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-  </el-form-item>
-  <router-link :to=" '/reg'">
-  <div class="goreg">>去注册</div>
-  </router-link>
-</el-form>
-</div>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+      </el-form-item>
+      <router-link :to=" '/reg'">
+        <div class="goreg">>去注册</div>
+      </router-link>
+    </el-form>
+  </div>
 </template>
 <script>
 export default {
@@ -53,27 +60,23 @@ export default {
 
           let { username, password, mdl } = this.ruleForm;
 
-          let { data } = await this.$axios.get(
-            "http://localhost:8080/login",
-            {
-              params: {
-                username,
-                password,
-                mdl
-              }
+          let { data } = await this.$axios.get("http://localhost:8080/login", {
+            params: {
+              username,
+              password,
+              mdl
             }
-          );
-          console.log("data:", data);
+          });
+          window.console.log("data:", data);
 
           // this.$router.replace('/mine')
           if (data.code === 1) {
-            let { targetUrl } = this.$route.query;console.log('targetUrl:',targetUrl)
-
-            
+            let { targetUrl } = this.$route.query;
+            window.console.log("targetUrl:", targetUrl);
 
             // 把token写入localstorage
             // localStorage.setItem("Authorization", data.data);
-            this.$store.commit('login',{username,Authorization:data.data})
+            this.$store.commit("login", { username, Authorization: data.data });
             // this.$router.replace({path:'/mine',params:{username}})
 
             this.$router.replace({
@@ -87,43 +90,44 @@ export default {
           return false;
         }
       });
+    },
+    goback() {
+      this.$router.push("/home");
     }
   }
 };
-
 </script>
 <style lang="scss" scoped>
-.el-header{
+.el-header {
   display: flex;
   justify-content: space-between;
   padding: 0;
   border-bottom: 1px solid #bfbfbf;
   margin-bottom: 50px;
-   h3{
-     line-height: 47px;
-     font-size: 18px;
-   }
-  
+  h3 {
+    line-height: 47px;
+    font-size: 18px;
+  }
 }
- .nulld{
-     width: 47px;
-     height: 47px;
-   }
- .el-icon-arrow-left{
-     width: 47px;
-     height: 47px;
-     font-size: 22px;
-     text-align: center;
-     line-height: 47px;
-   }
-.el-input{
-    width: 70%;
+.nulld {
+  width: 47px;
+  height: 47px;
 }
-.aa1{
- text-align: center;
- padding-right: 100px;
+.el-icon-arrow-left {
+  width: 47px;
+  height: 47px;
+  font-size: 22px;
+  text-align: center;
+  line-height: 47px;
 }
-.goreg{
+.el-input {
+  width: 70%;
+}
+.aa1 {
+  text-align: center;
+  padding-right: 100px;
+}
+.goreg {
   font-size: 16px;
   color: #bfbfbf;
   margin-left: 10px;

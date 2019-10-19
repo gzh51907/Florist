@@ -80,7 +80,11 @@ export default {
       return data;
     },
     goto(id) {
-      this.$router.push({ name: "detail", params: { id } });
+      this.$router.push({
+        name: "detail",
+        params: { id },
+        query: { targetUrl: this.$route.path }
+      });
     }
   },
   async created() {
@@ -99,7 +103,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" >
+<style lang="scss" scoped>
 .el-header,
 .el-footer {
   color: #333;

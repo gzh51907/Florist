@@ -1,9 +1,11 @@
 <template>
   <el-container>
     <el-header height="45px">
-      <div class="seach">
-        <input type="seach" placeholder="请输入鲜花名称/关键字" />
-      </div>
+      <div class="el-icon-arrow-left" @click="goback"></div>
+      <h3>
+        <img src="../assets/logo_new.png" alt />
+      </h3>
+      <div class="el-icon-s-unfold"></div>
     </el-header>
     <el-main>
       <el-menu
@@ -55,7 +57,15 @@ export default {
       return data;
     },
     goto(id) {
-      this.$router.push({ name: "detail", params: { id } });
+      this.$router.push({
+        name: "detail",
+        params: { id },
+        query: { targetUrl: this.$route.path }
+      });
+    },
+    goback() {
+      let { targetUrl } = this.$route.query;
+      this.$router.push("/classify");
     }
   },
   async created() {
@@ -65,16 +75,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .el-header {
-  width: 100%;
-  background: #fff;
-  position: fixed;
-  top: 0px;
-  left: 0px;
   display: flex;
-  padding: 6px 12px;
-  line-height: 0;
-  border-bottom: 1px solid rgb(237, 237, 237);
-  z-index: 9;
+  justify-content: space-between;
+  line-height: 40px;
+  height: 40px;
   .seach {
     width: 100%;
     input {
@@ -90,9 +94,23 @@ export default {
       background-color: rgb(237, 237, 237);
     }
   }
+  .el-icon-arrow-left,
+  .el-icon-s-unfold {
+    width: 25px;
+    height: 25px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 44px;
+  }
+  h3 {
+    img {
+      height: 22px;
+      width: 113px;
+      margin-top: 10px;
+    }
+  }
 }
 .el-main {
-  margin-top: 45px;
   background-color: white;
   padding-top: 0px;
   .el-menu {

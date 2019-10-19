@@ -13,10 +13,10 @@
         <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
           <img :src="item[0].titleurl" />
           <div class="con">
-            <a href="#/list" v-for="item in item" :key="item.imgurl">
+            <span v-for="item in item" :key="item.imgurl" @click="goto">
               <img :src="item.imgurl" />
               <p>{{item.class_name}}</p>
-            </a>
+            </span>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -40,6 +40,9 @@ export default {
         type
       });
       return data;
+    },
+    goto() {
+      this.$router.push("/list");
     }
   },
   async created() {
@@ -110,7 +113,7 @@ export default {
         overflow: hidden;
         visibility: hidden;
       }
-      a {
+      span {
         display: block;
         width: 33%;
         text-align: center;
