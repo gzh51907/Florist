@@ -9,7 +9,7 @@ const {
 
 const colName = 'goods'
 
-// 查询首页数据
+// 查询商品数据
 Router.post('/main', async (req, res) => {
     let result;
     try {

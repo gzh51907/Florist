@@ -8,11 +8,8 @@ import Cart from '../pages/Cart.vue';
 import Classify from '../pages/Classify.vue';
 import Mine from '../pages/Mine.vue';
 import Reg from '../pages/Reg.vue';
-<<<<<<< HEAD
 import Login from '../pages/Login.vue';
-=======
 import List from '../pages/List.vue';
->>>>>>> dev
 let router = new VueRouter({
     routes: [{
             name: 'home',
@@ -32,29 +29,51 @@ let router = new VueRouter({
             name: "cart",
             path: "/cart",
             component: Cart,
-
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             name: "mine",
             path: "/mine",
             component: Mine,
-
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/reg',
             component: Reg
         },
         {
-<<<<<<< HEAD
             path: '/login',
             component: Login
-        }
-=======
+        },
+        {
             name: "list",
             path: "/list",
             component: List
         },
->>>>>>> dev
     ]
 })
+
+// 路由全局守卫
+router.beforeEach(function (to, from, next) {
+    if (to.meta.requiresAuth) {
+        // let Authorization  = localStorage.getItem('Authorization');
+        // if(Authorization){
+        //     next();
+        // }else{
+        router.push({
+            path: '/login',
+            // query:{
+            //     targetUrl:to.fullPath
+            // }
+        })
+        // }
+    } else {
+        next();
+    }
+})
+
 export default router;

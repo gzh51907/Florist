@@ -18,7 +18,7 @@
         <el-menu-item index="4">新品</el-menu-item>
       </el-menu>
       <div class="flex-box">
-        <div class="flex-item" v-for="item in dataList" :key="item.gid">
+        <div class="flex-item" v-for="item in dataList" :key="item.gid" @click="goto(item.gid)">
           <div class="title">
             <img :src="item.imgurl" />
           </div>
@@ -53,6 +53,9 @@ export default {
         classify
       });
       return data;
+    },
+    goto(id) {
+      this.$router.push({ name: "detail", params: { id } });
     }
   },
   async created() {
