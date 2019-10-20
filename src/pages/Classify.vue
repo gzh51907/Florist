@@ -9,7 +9,7 @@
       <el-radio-group v-model="tabPosition">
         <el-radio-button label="left">left</el-radio-button>
       </el-radio-group>
-      <el-tabs :tab-position="tabPosition" height="400px">
+      <el-tabs :tab-position="tabPosition">
         <el-tab-pane :label="item[1].type" v-for="item in allClassData" :key="item[1].class_name">
           <img :src="item[0].titleurl" />
           <div class="con">

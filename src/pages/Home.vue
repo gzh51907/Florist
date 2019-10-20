@@ -34,7 +34,7 @@
       <div class="contain" v-for="item in allMainData" :key="item[1].goods_name">
         <h2 class="w1">{{item[1].classify}}</h2>
         <div class="flex-box">
-          <div class="flex-item" v-for="item in item" :key="item.gid">
+          <div class="flex-item" v-for="item in item" :key="item.gid" @click="goto(item.gid)">
             <div class="title">
               <!-- <div class="title" :style="{background:'url('+item.imgurl+')'}"> -->
               <img :src="item.imgurl" />
@@ -78,6 +78,9 @@ export default {
         classify
       });
       return data;
+    },
+    goto(id) {
+      this.$router.push({ name: "detail", params: { id } });
     }
   },
   async created() {
