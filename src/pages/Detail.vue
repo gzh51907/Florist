@@ -10,7 +10,6 @@
     <el-main>
       <div class="x1">
         <img :src="dataDetail[0].imgurl" />
-        <!-- <img src="http://img.vnasi.com/attachment/goods/800/201908/5d5f9a51d28cd.jpg" /> -->
       </div>
       <div class="proinfo">
         <div class="x2">
@@ -46,8 +45,8 @@
         </li>
       </ul>
       <div class="tabbar">
-        <a href id="addCart">加入购物车</a>
-        <a href id="soonBuy">立即购买</a>
+        <span id="addCart" @click="addCart">加入购物车</span>
+        <span id="soonBuy" @click="addNow">立即购买</span>
       </div>
     </el-main>
   </el-container>
@@ -76,18 +75,55 @@ export default {
     async getDetailData(id) {
       let {
         data: { data }
-      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
+      } = await this.$axios.post("http://192.168.6.182:8827/goods/main", {
         gid: id
       });
       return data;
+    },
+    addCart() {
+      function getCookie(key) {
+        var cookies = document.cookie;
+        var arr = cookies.split("; ");
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split("=");
+          if (key == arr2[0]) {
+            return arr2[1];
+          }
+        }
+      }
+      this.$axios.post("http://192.168.6.182:8827/carts", {
+        username: getCookie("username"),
+        gid: this.$route.params.id
+      });
+      let result = confirm("加入购物车成功，是否进入购物车");
+      if (result) {
+        this.$router.push("/cart");
+      }
+    },
+    addNow() {
+      function getCookie(key) {
+        var cookies = document.cookie;
+        var arr = cookies.split("; ");
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split("=");
+          if (key == arr2[0]) {
+            return arr2[1];
+          }
+        }
+      }
+      this.$axios.post("http://192.168.6.182:8827/carts", {
+        username: getCookie("username"),
+        gid: this.$route.params.id
+      });
+      this.$router.push("/cart");
     }
   },
   async created() {
-    window.console.log(this.$route);
+    // window.console.log(this.$route);
     let { id } = this.$route.params;
     this.dataDetail = await this.getDetailData(id);
-    window.console.log(this.dataDetail);
-    window.console.log(this.dataDetail[0]);
+    // window.console.log(this.dataDetail);
+    // window.console.log(this.dataDetail[0]);
   }
 };
 </script>
@@ -234,7 +270,7 @@ export default {
     line-height: 0.65rem;
     font-size: 0.175rem;
     color: #fff;
-    background-color: #3d4d42;
+    background-color: #e6a23c;
   }
   #soonBuy {
     display: block;
@@ -242,7 +278,7 @@ export default {
     line-height: 0.65rem;
     font-size: 0.175rem;
     color: #fff;
-    background-color: #ff734c;
+    background-color: #f56c6c;
   }
 }
 </style>

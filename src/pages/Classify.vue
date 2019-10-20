@@ -36,7 +36,7 @@ export default {
     async getMainData(type) {
       let {
         data: { data }
-      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
+      } = await this.$axios.post("http://192.168.6.182:8827/goods/main", {
         type
       });
       return data;

@@ -4,7 +4,7 @@
     <el-main style="padding:0">
       <div class="m-top">
         <div class="m1">
-          <img src="../assets/yh.png" alt />
+          <img src="../assets/yh.jpeg" alt />
           <div class="dl">欢迎您</div>
         </div>
         <div class="m2">

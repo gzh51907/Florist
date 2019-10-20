@@ -22,7 +22,7 @@ Router.use((req, res, next) => {
 // 引入每个模块路由
 const goodsRouter = require('./goods');
 const userRouter = require('./user');
-// const cartsRouter = require('./carts');
+const cartsRouter = require('./carts');
 
 // 格式化请求体数据
 Router.use(express.urlencoded({
@@ -31,7 +31,7 @@ Router.use(express.urlencoded({
 
 Router.use('/goods', goodsRouter);
 Router.use('/user', userRouter);
-// Router.use('/carts', cartsRouter);
+Router.use('/carts', cartsRouter);
 
 // 检验前端token
 Router.get('/verify', (req, res) => {

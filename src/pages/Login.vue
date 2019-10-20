@@ -50,13 +50,19 @@ export default {
   },
   methods: {
     login() {
+      function setCookie(key, val, iDay) {
+        var now = new Date();
+        now.setDate(now.getDate() + iDay);
+        document.cookie =
+          key + "=" + val + ";expires=" + now.toUTCString() + ";path=/";
+      }
       this.$refs.ruleForm.validate(async valid => {
         // valid： 所有校验规则都通过后，得到true，只要有一个表单元素校验不通过则得到form
         if (valid) {
           // 根据服务器返回结果：登录成功->跳到我的页面或者之前的页面
           let { username, password, mdl } = this.ruleForm;
           let { data } = await this.$axios.get(
-            "http://10.3.133.163:8827/user/login",
+            "http://192.168.6.182:8827/user/login",
             {
               params: {
                 username,
@@ -69,6 +75,7 @@ export default {
             let { targetUrl } = this.$route.query;
             // 把token写入localStorage
             localStorage.setItem("Authorization", data.data);
+            setCookie("username", username, 20);
             // this.$store.commit("login", { username, Authorization: data.data });
             this.$router.replace({
               path: targetUrl || "/home"
