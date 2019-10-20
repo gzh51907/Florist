@@ -47,8 +47,8 @@
               <h2>{{item.goods_name}}</h2>
               <h3>{{item.info}}</h3>
               <h4>
-                {{item.price.toFixed(2)}}
-                <span>{{(item.price*1.5).toFixed(2)}}</span>
+                ¥{{item.price.toFixed(2)}}
+                <span>¥{{(item.price*1.5).toFixed(2)}}</span>
               </h4>
             </div>
           </div>
@@ -82,9 +82,12 @@ export default {
     goto(id) {
       this.$router.push({
         name: "detail",
-        params: { id },
-        query: { targetUrl: this.$route.path }
+        params: { targetUrl: this.$route.path, id }
       });
+      // this.$router.push({
+      //   name: "detail",
+      //   query: { targetUrl: this.$route.path, id }
+      // });
     }
   },
   async created() {

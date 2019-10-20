@@ -28,8 +28,8 @@
             <h2>{{item.goods_name}}</h2>
             <h3>{{item.info}}</h3>
             <h4>
-              {{item.sell_price}}
-              <span>{{item.market_price}}</span>
+              ¥{{item.sell_price}}
+              <span>¥{{item.market_price}}</span>
             </h4>
           </div>
         </div>
@@ -59,12 +59,14 @@ export default {
     goto(id) {
       this.$router.push({
         name: "detail",
-        params: { id },
-        query: { targetUrl: this.$route.path }
+        params: { targetUrl: this.$route.path, id }
       });
+      // this.$router.push({
+      //   name: "detail",
+      //   query: { targetUrl: this.$route.path, id }
+      // });
     },
     goback() {
-      let { targetUrl } = this.$route.query;
       this.$router.push("/classify");
     }
   },

@@ -54,10 +54,11 @@ let router = new VueRouter({
             name: "list",
             path: "/list",
             component: List
-        }, {
-
-            name: "detail",
-            path: "/detail",
+        },
+        // 动态路由
+        {
+            name: 'detail',
+            path: '/detail/:id',
             component: Detail
         }
 

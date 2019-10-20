@@ -9,34 +9,36 @@
     </el-header>
     <el-main>
       <div class="x1">
-        <img src="../assets/go1.jpg" alt />
+        <img :src="dataDetail[0].imgurl" />
+        <!-- <img src="http://img.vnasi.com/attachment/goods/800/201908/5d5f9a51d28cd.jpg" /> -->
       </div>
       <div class="proinfo">
         <div class="x2">
           <div class="proinfo-head">
-            <div class="proinfo-head-t">一往情深-精品玫瑰礼盒:19枝红玫瑰，勿忘我0.1扎</div>
+            <div class="proinfo-head-t">{{dataDetail[0].goods_name}}</div>
             <span>经典爆款，年销售冠军！</span>
           </div>
           <div class="proinfo-collect el-icon-star-off"></div>
         </div>
         <div class="x3">
-          <span>¥239</span>
-          <em>¥260</em>
+          <span>¥{{dataDetail[0].sell_price}}</span>
+          <em>¥{{dataDetail[0].market_price}}</em>
         </div>
       </div>
       <div class="lijian">APP下单立减5元</div>
       <ul class="detailsinfo">
         <li>
           <div class="detailsinfo-l">编号</div>
-          <div class="detailsinfo-r">gid</div>
+          <div class="detailsinfo-r">{{dataDetail[0].gid}}</div>
         </li>
         <li>
           <div class="detailsinfo-l">花材</div>
-          <div class="detailsinfo-r">info</div>
+          <div class="detailsinfo-r">{{dataDetail[0].info}}</div>
         </li>
         <li>
           <div class="detailsinfo-l">包装</div>
           <div class="detailsinfo-r">白色网纸内衬，不少于4张粉色雾面纸外包装</div>
+          <!-- <div class="detailsinfo-r">{{dataDetail[0].imgurl}}</div> -->
         </li>
         <li class="last">
           <div class="detailsinfo-l">配送</div>
@@ -52,23 +54,51 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      dataDetail: []
+    };
+  },
   methods: {
     goback() {
-      let { targetUrl } = this.$route.query;
-      this.$router.push({
-        path: targetUrl
+      let { targetUrl } = this.$route.params;
+      if (targetUrl) {
+        this.$router.push({
+          path: targetUrl
+        });
+      } else {
+        this.$router.push({
+          path: "/home"
+        });
+      }
+    },
+    async getDetailData(id) {
+      let {
+        data: { data }
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
+        gid: id
       });
+      return data;
     }
+  },
+  async created() {
+    window.console.log(this.$route);
+    let { id } = this.$route.params;
+    this.dataDetail = await this.getDetailData(id);
+    window.console.log(this.dataDetail);
+    window.console.log(this.dataDetail[0]);
   }
 };
 </script>
 <style lang="scss" scoped>
 .el-header {
-  // position: fixed;
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   line-height: 40px;
   height: 40px;
+  background-color: white;
   .el-icon-arrow-left,
   .el-icon-s-unfold {
     // margin-top: 5px;
@@ -89,6 +119,7 @@ export default {
 .el-main {
   padding: 0;
   background: #f4f4f4;
+  margin-top: 40px;
 }
 .x1 {
   width: 5.0625rem;
