@@ -68,17 +68,17 @@ let router = new VueRouter({
 // 路由全局守卫
 router.beforeEach(function (to, from, next) {
     if (to.meta.requiresAuth) {
-        // let Authorization  = localStorage.getItem('Authorization');
-        // if(Authorization){
-        //     next();
-        // }else{
-        router.push({
-            path: '/login',
-            // query:{
-            //     targetUrl:to.fullPath
-            // }
-        })
-        // }
+        let Authorization = localStorage.getItem('Authorization');
+        if (Authorization) {
+            next();
+        } else {
+            router.push({
+                path: '/login',
+                query: {
+                    targetUrl: to.fullPath
+                }
+            })
+        }
     } else {
         next();
     }

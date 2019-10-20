@@ -23,10 +23,10 @@
         <el-checkbox label="下次免登陆" v-model="ruleForm.mdl"></el-checkbox>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+        <el-button type="primary" @click="login('ruleForm')">登录</el-button>
       </el-form-item>
       <router-link :to=" '/reg'">
-        <div class="goreg">>去注册</div>
+        <div class="goreg">> 去注册</div>
       </router-link>
     </el-form>
   </div>
@@ -49,44 +49,34 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      //   校验整个表单
-      this.$refs.regForm.validate(async valid => {
+    login() {
+      this.$refs.ruleForm.validate(async valid => {
         // valid： 所有校验规则都通过后，得到true，只要有一个表单元素校验不通过则得到form
         if (valid) {
-          // alert('submit!');
-          // 发起ajax请求，等待服务器返回结果
-          // 根据服务器返回结果：注册成功->跳到“我的”
-
+          // 根据服务器返回结果：登录成功->跳到我的页面或者之前的页面
           let { username, password, mdl } = this.ruleForm;
-
-          let { data } = await this.$axios.get("http://localhost:8080/login", {
-            params: {
-              username,
-              password,
-              mdl
+          let { data } = await this.$axios.get(
+            "http://10.3.133.163:8827/user/login",
+            {
+              params: {
+                username,
+                password,
+                mdl
+              }
             }
-          });
-          window.console.log("data:", data);
-
-          // this.$router.replace('/mine')
+          );
           if (data.code === 1) {
             let { targetUrl } = this.$route.query;
-            window.console.log("targetUrl:", targetUrl);
-
-            // 把token写入localstorage
-            // localStorage.setItem("Authorization", data.data);
-            this.$store.commit("login", { username, Authorization: data.data });
-            // this.$router.replace({path:'/mine',params:{username}})
-
+            // 把token写入localStorage
+            localStorage.setItem("Authorization", data.data);
+            // this.$store.commit("login", { username, Authorization: data.data });
             this.$router.replace({
-              path: targetUrl || "/mine"
+              path: targetUrl || "/home"
             });
           } else {
             alert("用户名或密码不正确");
           }
         } else {
-          window.console.log("error submit!!");
           return false;
         }
       });
@@ -131,5 +121,6 @@ export default {
   font-size: 16px;
   color: #bfbfbf;
   margin-left: 10px;
+  display: inline-block;
 }
 </style>

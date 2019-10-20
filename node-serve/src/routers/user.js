@@ -33,6 +33,7 @@ Router.post('/reg', async (req, res) => {
     res.send(result);
 })
 
+// 查询是否有某用户
 Router.get('/check', async (req, res) => {
     let {
         username
