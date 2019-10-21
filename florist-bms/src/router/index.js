@@ -1,7 +1,5 @@
 import Vue from 'vue';
-//1.引入vue-router
 import VueRouter from 'vue-router';
-//使用vue-router
 Vue.use(VueRouter);
 import goodlist from '../pages/goodlist.vue';
 import userlist from '../pages/userlist.vue';

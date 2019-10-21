@@ -24,7 +24,7 @@ const goodsRouter = require('./goods');
 const userRouter = require('./user');
 const cartsRouter = require('./carts');
 
-// 格式化请求体数据
+// 格式化请求体的数据
 Router.use(express.urlencoded({
     extended: true
 }), express.json());

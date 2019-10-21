@@ -37,10 +37,8 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value !== this.ruleForm.password) {
-        //   校验失败
         callback(new Error("两次输入密码不一致!"));
       } else {
-        //   通过校验
         callback();
       }
     };

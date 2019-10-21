@@ -57,7 +57,7 @@ export default {
     async getCartNum(username) {
       let {
         data: { data }
-      } = await this.$axios.get("http://192.168.6.182:8827/carts", {
+      } = await this.$axios.get("http://47.104.195.230:8827/carts", {
         params: {
           username
         }
@@ -67,7 +67,7 @@ export default {
     async getCartDate(gid) {
       let {
         data: { data }
-      } = await this.$axios.post("http://192.168.6.182:8827/goods/main", {
+      } = await this.$axios.post("http://47.104.195.230:8827/goods/main", {
         gid
       });
       return data;

@@ -93,12 +93,4 @@ Router.route('/:id')
 
     })
 
-    // 查询指定用户
-    .get((req, res) => {
-
-    })
-
-
-
-
 module.exports = Router;

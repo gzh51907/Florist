@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     signOut() {
-      let result = confirm("确定要退出吗？");
+      let result = confirm("您确定要退出吗？");
       if (result) {
         localStorage.removeItem("Authorization");
         this.$router.replace({

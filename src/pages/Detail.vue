@@ -75,7 +75,7 @@ export default {
     async getDetailData(id) {
       let {
         data: { data }
-      } = await this.$axios.post("http://192.168.6.182:8827/goods/main", {
+      } = await this.$axios.post("http://47.104.195.230:8827/goods/main", {
         gid: id
       });
       return data;
@@ -91,7 +91,7 @@ export default {
           }
         }
       }
-      this.$axios.post("http://192.168.6.182:8827/carts", {
+      this.$axios.post("http://47.104.195.230:8827/carts", {
         username: getCookie("username"),
         gid: this.$route.params.id
       });
@@ -111,7 +111,7 @@ export default {
           }
         }
       }
-      this.$axios.post("http://192.168.6.182:8827/carts", {
+      this.$axios.post("http://47.104.195.230:8827/carts", {
         username: getCookie("username"),
         gid: this.$route.params.id
       });

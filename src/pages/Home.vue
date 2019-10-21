@@ -74,7 +74,7 @@ export default {
     async getMainData(classify) {
       let {
         data: { data }
-      } = await this.$axios.post("http://192.168.6.182:8827/goods/main", {
+      } = await this.$axios.post("http://47.104.195.230:8827/goods/main", {
         classify
       });
       return data;
@@ -84,10 +84,6 @@ export default {
         name: "detail",
         params: { targetUrl: this.$route.path, id }
       });
-      // this.$router.push({
-      //   name: "detail",
-      //   query: { targetUrl: this.$route.path, id }
-      // });
     }
   },
   async created() {
