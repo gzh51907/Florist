@@ -47,8 +47,8 @@
               <h2>{{item.goods_name}}</h2>
               <h3>{{item.info}}</h3>
               <h4>
-                ¥{{item.price.toFixed(2)}}
-                <span>¥{{(item.price*1.5).toFixed(2)}}</span>
+                ¥{{item.sell_price}}
+                <span>¥{{item.market_price}}</span>
               </h4>
             </div>
           </div>

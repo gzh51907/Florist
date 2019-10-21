@@ -46,7 +46,7 @@ export default {
     // 校验用户名是否存在
     const checkUsername = async (rule, value, callback) => {
       let { data } = await this.$axios.get(
-        "http://192.168.6.182:8827/user/check",
+        "http://47.104.195.230:8827/user/check",
         {
           params: {
             username: this.ruleForm.username
@@ -98,7 +98,7 @@ export default {
           // 根据服务器返回结果：注册成功->跳到登录页面
           let { username, password } = this.ruleForm;
           let { data } = await this.$axios.post(
-            "http://192.168.6.182:8827/user/reg",
+            "http://47.104.195.230:8827/user/reg",
             {
               username,
               password
