@@ -11,12 +11,17 @@
         </el-col>
       </el-row>
     </div>
-    <router-view style="padding-bottom:60px;" />
+    <router-view style="padding-bottom:60px;" v-if="isRouterAlive"/>
   </div>
 </template>
 <script>
 export default {
   name: "app",
+  provide(){
+		return {
+			reload:this.reload
+		}
+	},
   data() {
     return {
       activeIndex: "/home",
@@ -45,8 +50,17 @@ export default {
           text: "我的",
           icon: "el-icon-s-custom"
         }
-      ]
+      ],
+      isRouterAlive:true
     };
+  },
+  methods:{
+    reload(){
+			this.isRouterAlive = false;
+			this.$nextTick(function(){
+				this.isRouterAlive = true;
+			})
+		}
   }
 };
 </script>

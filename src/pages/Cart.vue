@@ -43,6 +43,7 @@
 <script>
 export default {
   name: "Cart",
+  inject:['reload'],
   data() {
     return {
       dataCart: []
@@ -56,11 +57,24 @@ export default {
       
     },
   
-    remove(id){
-      this.$axios.post('',{gid:'id'},
-      
-      )
-      console.log(id)
+    async remove(gid){
+       function getCookie(key) {
+      var cookies = document.cookie;
+      var arr = cookies.split("; ");
+      for (var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split("=");
+        if (key == arr2[0]) {
+          return arr2[1];
+        }
+      }
+    }
+    // console.log(gid);
+      let data = await this.$axios.post('http://10.3.133.60:8827/carts/delete',{
+        username:getCookie('username'),
+        gid
+        })
+        // this.$router.push('/cart')
+        this.reload()
     },
    
     async getCartNum(username) {
@@ -85,8 +99,7 @@ export default {
   computed: {
 
   },
-  async mounted() {
-    window.console.log(111);
+  async created() {
     function getCookie(key) {
       var cookies = document.cookie;
       var arr = cookies.split("; ");
@@ -113,12 +126,10 @@ export default {
       dataCart.push(temp2);
     }
     this.dataCart = dataCart;
-    window.console.log(this.dataCart);
   },
-  beforeRouteEnter(to, from, next) {
-    window.console.log(222);
-    next();
-  }
+  // beforeRouteEnter(to, from, next) {
+  //   next();
+  // }
 };
 </script>
 <style lang="scss" scoped>

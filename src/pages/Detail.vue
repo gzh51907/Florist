@@ -80,7 +80,7 @@ export default {
       });
       return data;
     },
-    addCart() {
+    async addCart() {
       function getCookie(key) {
         var cookies = document.cookie;
         var arr = cookies.split("; ");
@@ -91,7 +91,7 @@ export default {
           }
         }
       }
-      this.$axios.post("http://10.3.133.60:8827/carts", {
+      await this.$axios.post("http://10.3.133.60:8827/carts", {
         username: getCookie("username"),
         gid: this.$route.params.id,
         num:1
@@ -100,8 +100,9 @@ export default {
       if (result) {
         this.$router.push("/cart");
       }
+    
     },
-    addNow() {
+    async addNow() {
       function getCookie(key) {
         var cookies = document.cookie;
         var arr = cookies.split("; ");
@@ -112,7 +113,7 @@ export default {
           }
         }
       }
-      this.$axios.post("http://10.3.133.60:8827/carts", {
+      await this.$axios.post("http://10.3.133.60:8827/carts", {
         username: getCookie("username"),
         gid: this.$route.params.id,
         num:1
