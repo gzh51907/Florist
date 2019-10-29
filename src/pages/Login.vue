@@ -62,7 +62,7 @@ export default {
           // 根据服务器返回结果：登录成功->跳到我的页面或者之前的页面
           let { username, password, mdl } = this.ruleForm;
           let { data } = await this.$axios.get(
-            "http://10.3.133.60:8827/user/login",
+            "http://10.3.133.163:8827/user/login",
             {
               params: {
                 username,

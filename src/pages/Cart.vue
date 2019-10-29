@@ -21,17 +21,17 @@
           </section>
         </div>
         <el-row>
-        <el-button type="danger" icon="el-icon-delete" circle   @click="remove(item.gid)"></el-button>
+          <el-button type="danger" icon="el-icon-delete" circle @click="remove(item.gid)"></el-button>
         </el-row>
       </div>
     </el-main>
     <el-footer height="40px">
       <div class="foot-l">
-       <el-checkbox>全选</el-checkbox>
-      <span >
-        合计:
-        <em>￥{{}}</em>
-      </span>
+        <el-checkbox>全选</el-checkbox>
+        <span>
+          合计:
+          <em>￥</em>
+        </span>
       </div>
       <button class="foot-r">
         去结算
@@ -43,7 +43,7 @@
 <script>
 export default {
   name: "Cart",
-  inject:['reload'],
+  inject: ["reload"],
   data() {
     return {
       dataCart: []
@@ -53,34 +53,30 @@ export default {
     goback() {
       this.$router.push("/home");
     },
-    handleChange() {
-      
-    },
-  
-    async remove(gid){
-       function getCookie(key) {
-      var cookies = document.cookie;
-      var arr = cookies.split("; ");
-      for (var i = 0; i < arr.length; i++) {
-        var arr2 = arr[i].split("=");
-        if (key == arr2[0]) {
-          return arr2[1];
+    handleChange() {},
+
+    async remove(gid) {
+      function getCookie(key) {
+        var cookies = document.cookie;
+        var arr = cookies.split("; ");
+        for (var i = 0; i < arr.length; i++) {
+          var arr2 = arr[i].split("=");
+          if (key == arr2[0]) {
+            return arr2[1];
+          }
         }
       }
-    }
-    // console.log(gid);
-      let data = await this.$axios.post('http://10.3.133.60:8827/carts/delete',{
-        username:getCookie('username'),
+      await this.$axios.post("http://10.3.133.163:8827/carts/delete", {
+        username: getCookie("username"),
         gid
-        })
-        // this.$router.push('/cart')
-        this.reload()
+      });
+      this.reload();
     },
-   
+
     async getCartNum(username) {
       let {
         data: { data }
-      } = await this.$axios.get("http://10.3.133.60:8827/carts", {
+      } = await this.$axios.get("http://10.3.133.163:8827/carts", {
         params: {
           username
         }
@@ -90,15 +86,13 @@ export default {
     async getCartDate(gid) {
       let {
         data: { data }
-      } = await this.$axios.post("http://10.3.133.60:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
         gid
       });
       return data;
     }
   },
-  computed: {
-
-  },
+  computed: {},
   async created() {
     function getCookie(key) {
       var cookies = document.cookie;
@@ -115,9 +109,9 @@ export default {
     for (let i = 0; i < dataNum.length; i++) {
       var temp1 = {
         gid: dataNum[i].gid,
-        num:dataNum[i].num
+        num: dataNum[i].num
       };
-      num.push(temp1);//num[{gid:111,num:1},{}]
+      num.push(temp1);
     }
     let dataCart = [];
     for (let j = 0; j < num.length; j++) {
@@ -126,7 +120,7 @@ export default {
       dataCart.push(temp2);
     }
     this.dataCart = dataCart;
-  },
+  }
   // beforeRouteEnter(to, from, next) {
   //   next();
   // }
@@ -158,8 +152,8 @@ html {
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
-    .el-row{
-    padding: .4375rem 0 .5625rem;
+    .el-row {
+      padding: 0.4375rem 0 0.5625rem;
     }
     .el-checkbox {
       // margin-left: 5px;
@@ -280,9 +274,9 @@ html {
   box-sizing: border-box;
   background-color: white;
   .el-checkbox {
-      margin-left: 15px;
-       margin-right: 15px;
-    }
+    margin-left: 15px;
+    margin-right: 15px;
+  }
   em {
     color: #ff734c;
   }

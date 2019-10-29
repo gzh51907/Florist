@@ -74,7 +74,7 @@ export default {
     async getMainData(classify) {
       let {
         data: { data }
-      } = await this.$axios.post("http://10.3.133.60:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
         classify
       });
       return data;

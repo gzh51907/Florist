@@ -75,7 +75,7 @@ export default {
     async getDetailData(id) {
       let {
         data: { data }
-      } = await this.$axios.post("http://10.3.133.60:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.163:8827/goods/main", {
         gid: id
       });
       return data;
@@ -91,16 +91,41 @@ export default {
           }
         }
       }
-      await this.$axios.post("http://10.3.133.60:8827/carts", {
-        username: getCookie("username"),
-        gid: this.$route.params.id,
-        num:1
-      });
-      let result = confirm("加入购物车成功，是否进入购物车");
-      if (result) {
-        this.$router.push("/cart");
+      let username = getCookie("username");
+      if (username) {
+        let {
+          data: { data }
+        } = await this.$axios.get("http://10.3.133.163:8827/carts/check", {
+          params: {
+            username,
+            gid: this.$route.params.id
+          }
+        });
+        if (data.length) {
+          var num = data[0].num + 1;
+          await this.$axios.post("http://10.3.133.163:8827/carts/edit", {
+            username,
+            gid: this.$route.params.id,
+            num
+          });
+          let result = confirm("加入购物车成功，是否进入购物车");
+          if (result) {
+            this.$router.push("/cart");
+          }
+        } else {
+          await this.$axios.post("http://10.3.133.163:8827/carts", {
+            username,
+            gid: this.$route.params.id,
+            num: 1
+          });
+          let result = confirm("加入购物车成功，是否进入购物车");
+          if (result) {
+            this.$router.push("/cart");
+          }
+        }
+      } else {
+        this.$router.push("/login");
       }
-    
     },
     async addNow() {
       function getCookie(key) {
@@ -113,20 +138,41 @@ export default {
           }
         }
       }
-      await this.$axios.post("http://10.3.133.60:8827/carts", {
-        username: getCookie("username"),
-        gid: this.$route.params.id,
-        num:1
-      });
-      this.$router.push("/cart");
+      let username = getCookie("username");
+      if (username) {
+        let {
+          data: { data }
+        } = await this.$axios.get("http://10.3.133.163:8827/carts/check", {
+          params: {
+            username,
+            gid: this.$route.params.id
+          }
+        });
+        if (data.length) {
+          var num = data[0].num + 1;
+          await this.$axios.post("http://10.3.133.163:8827/carts/edit", {
+            username,
+            gid: this.$route.params.id,
+            num
+          });
+          this.$router.push("/cart");
+        } else {
+          await this.$axios.post("http://10.3.133.163:8827/carts", {
+            username,
+            gid: this.$route.params.id,
+            num: 1
+          });
+          this.$router.push("/cart");
+        }
+      } else {
+        this.$router.push("/login");
+      }
     }
   },
-  async beforeMount() {
-    // window.console.log(this.$route);
+  async created() {
     let { id } = this.$route.params;
-    this.dataDetail = await this.getDetailData(id);
-    // window.console.log(this.dataDetail);
-    // window.console.log(this.dataDetail[0]);
+    let dataDetail = await this.getDetailData(id);
+    this.dataDetail = dataDetail;
   }
 };
 </script>
@@ -141,7 +187,6 @@ export default {
   background-color: white;
   .el-icon-arrow-left,
   .el-icon-s-unfold {
-    // margin-top: 5px;
     width: 25px;
     height: 25px;
     font-size: 24px;

@@ -77,9 +77,19 @@ export default {
   },
   methods: {
     signOut() {
+      function setCookie(key, val, iDay) {
+        var now = new Date();
+        now.setDate(now.getDate() + iDay);
+        document.cookie =
+          key + "=" + val + ";expires=" + now.toUTCString() + ";path=/";
+      }
+      function removeCookie(key) {
+        setCookie(key, "", -1);
+      }
       let result = confirm("您确定要退出吗？");
       if (result) {
         localStorage.removeItem("Authorization");
+        removeCookie("username");
         this.$router.replace({
           path: "/home"
         });
