@@ -13,24 +13,26 @@
           <section class="title">{{item.goods_name}}</section>
           <section class="num">
             数量：
-            <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+            <el-input-number v-model="item.num" @change="changeQty(item.id,$event)"></el-input-number>
           </section>
           <section class="price">
             单价:
             <span>￥{{item.sell_price}}</span>
           </section>
         </div>
-      </div>
-
-      <div class="all">
-        <el-checkbox>全选</el-checkbox>
+        <el-row>
+        <el-button type="danger" icon="el-icon-delete" circle   @click="remove(item.gid)"></el-button>
+        </el-row>
       </div>
     </el-main>
     <el-footer height="40px">
-      <span class="foot-l">
+      <div class="foot-l">
+       <el-checkbox>全选</el-checkbox>
+      <span >
         合计:
-        <em>￥</em>
+        <em>￥{{}}</em>
       </span>
+      </div>
       <button class="foot-r">
         去结算
         <span>0</span>
@@ -43,7 +45,6 @@ export default {
   name: "Cart",
   data() {
     return {
-      num: 1,
       dataCart: []
     };
   },
@@ -51,13 +52,21 @@ export default {
     goback() {
       this.$router.push("/home");
     },
-    handleChange(value) {
-      window.console.log(value);
+    handleChange() {
+      
     },
+  
+    remove(id){
+      this.$axios.post('',{gid:'id'},
+      
+      )
+      console.log(id)
+    },
+   
     async getCartNum(username) {
       let {
         data: { data }
-      } = await this.$axios.get("http://47.104.195.230:8827/carts", {
+      } = await this.$axios.get("http://10.3.133.60:8827/carts", {
         params: {
           username
         }
@@ -67,14 +76,16 @@ export default {
     async getCartDate(gid) {
       let {
         data: { data }
-      } = await this.$axios.post("http://47.104.195.230:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.60:8827/goods/main", {
         gid
       });
       return data;
     }
   },
-  computed: {},
-  async created() {
+  computed: {
+
+  },
+  async mounted() {
     window.console.log(111);
     function getCookie(key) {
       var cookies = document.cookie;
@@ -90,16 +101,19 @@ export default {
     let num = [];
     for (let i = 0; i < dataNum.length; i++) {
       var temp1 = {
-        gid: dataNum[i].gid
+        gid: dataNum[i].gid,
+        num:dataNum[i].num
       };
-      num.push(temp1);
+      num.push(temp1);//num[{gid:111,num:1},{}]
     }
     let dataCart = [];
     for (let j = 0; j < num.length; j++) {
       var temp2 = (await this.getCartDate(num[j].gid))[0];
+      temp2.num = num[j].num;
       dataCart.push(temp2);
     }
     this.dataCart = dataCart;
+    window.console.log(this.dataCart);
   },
   beforeRouteEnter(to, from, next) {
     window.console.log(222);
@@ -124,13 +138,6 @@ html {
 .el-main {
   padding: 0;
   width: 100%;
-
-  .all {
-    margin-top: 20px;
-    .el-checkbox {
-      margin-left: 15px;
-    }
-  }
   .card {
     padding: 10px;
     display: flex;
@@ -139,6 +146,10 @@ html {
     height: 140px;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
+    .el-row{
+    padding: .4375rem 0 .5625rem;
+    }
     .el-checkbox {
       // margin-left: 5px;
       margin-top: 50px;
@@ -178,6 +189,7 @@ html {
     }
   }
 }
+
 .el-icon-arrow-left {
   width: 47px;
   height: 47px;
@@ -243,9 +255,10 @@ html {
   height: 38px;
   line-height: 38px;
   position: fixed;
-  bottom: 60px;
+  bottom: 50px;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 .foot-l {
   display: inline-block;
@@ -255,6 +268,10 @@ html {
   border: 1px solid rgba(180, 186, 191, 0.5);
   box-sizing: border-box;
   background-color: white;
+  .el-checkbox {
+      margin-left: 15px;
+       margin-right: 15px;
+    }
   em {
     color: #ff734c;
   }

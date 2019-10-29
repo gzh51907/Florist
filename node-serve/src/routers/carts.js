@@ -10,16 +10,18 @@ const {
 const colName = 'carts'
 
 // 增加购物车的数据
-Router.post('/', async (req, res) => {
+Router.post('/', async(req, res) => {
     let {
         username,
         gid,
+        num
     } = req.body;
     let result
     try {
         await mongo.create(colName, [{
             username,
-            gid
+            gid,
+            num
         }]);
         result = formatData()
     } catch (err) {
@@ -31,7 +33,7 @@ Router.post('/', async (req, res) => {
 })
 
 // 查询某用户购物车
-Router.get('/', async (req, res) => {
+Router.get('/', async(req, res) => {
     let {
         username
     } = req.query;

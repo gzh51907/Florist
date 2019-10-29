@@ -75,7 +75,7 @@ export default {
     async getDetailData(id) {
       let {
         data: { data }
-      } = await this.$axios.post("http://47.104.195.230:8827/goods/main", {
+      } = await this.$axios.post("http://10.3.133.60:8827/goods/main", {
         gid: id
       });
       return data;
@@ -91,9 +91,10 @@ export default {
           }
         }
       }
-      this.$axios.post("http://47.104.195.230:8827/carts", {
+      this.$axios.post("http://10.3.133.60:8827/carts", {
         username: getCookie("username"),
-        gid: this.$route.params.id
+        gid: this.$route.params.id,
+        num:1
       });
       let result = confirm("加入购物车成功，是否进入购物车");
       if (result) {
@@ -111,14 +112,15 @@ export default {
           }
         }
       }
-      this.$axios.post("http://47.104.195.230:8827/carts", {
+      this.$axios.post("http://10.3.133.60:8827/carts", {
         username: getCookie("username"),
-        gid: this.$route.params.id
+        gid: this.$route.params.id,
+        num:1
       });
       this.$router.push("/cart");
     }
   },
-  async created() {
+  async beforeMount() {
     // window.console.log(this.$route);
     let { id } = this.$route.params;
     this.dataDetail = await this.getDetailData(id);
