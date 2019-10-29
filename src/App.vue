@@ -1,27 +1,29 @@
 <template>
   <div>
     <div class="footer">
-      <el-row v-if="this.$route.path=='/home' | this.$route.path=='/cart' | this.$route.path=='/mine' |
-      $route.path=='/classify'">
-        <el-col :span="6" v-for="item in menus" :key="item.name" >
-          <router-link :to="item.path" active-class="current" >
+      <el-row
+        v-if="this.$route.path=='/home' | this.$route.path=='/cart' | this.$route.path=='/mine' |
+      $route.path=='/classify'"
+      >
+        <el-col :span="6" v-for="item in menus" :key="item.name">
+          <router-link :to="item.path" active-class="current">
             <div class="bg-purple" :class="item.icon"></div>
             <p>{{item.text}}</p>
           </router-link>
         </el-col>
       </el-row>
     </div>
-    <router-view style="padding-bottom:60px;" v-if="isRouterAlive"/>
+    <router-view style="padding-bottom:60px;" v-if="isRouterAlive" />
   </div>
 </template>
 <script>
 export default {
   name: "app",
-  provide(){
-		return {
-			reload:this.reload
-		}
-	},
+  provide() {
+    return {
+      reload: this.reload
+    };
+  },
   data() {
     return {
       activeIndex: "/home",
@@ -51,16 +53,16 @@ export default {
           icon: "el-icon-s-custom"
         }
       ],
-      isRouterAlive:true
+      isRouterAlive: true
     };
   },
-  methods:{
-    reload(){
-			this.isRouterAlive = false;
-			this.$nextTick(function(){
-				this.isRouterAlive = true;
-			})
-		}
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
+    }
   }
 };
 </script>

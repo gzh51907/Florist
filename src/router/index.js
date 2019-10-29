@@ -10,7 +10,7 @@ import Login from '../pages/Login.vue';
 import List from '../pages/List.vue';
 import Detail from '../pages/Detail.vue';
 let router = new VueRouter({
-    // mode: 'history',
+    mode: 'history',
     routes: [{
             name: 'home',
             path: '/home',
@@ -65,7 +65,7 @@ let router = new VueRouter({
 })
 
 // 路由全局守卫
-router.beforeEach(function(to, from, next) {
+router.beforeEach(function (to, from, next) {
     if (to.meta.requiresAuth) {
         let Authorization = localStorage.getItem('Authorization');
         if (Authorization) {
