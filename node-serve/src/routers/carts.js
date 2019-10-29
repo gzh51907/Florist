@@ -10,7 +10,7 @@ const {
 const colName = 'carts'
 
 // 增加购物车的数据
-Router.post('/', async(req, res) => {
+Router.post('/', async (req, res) => {
     let {
         username,
         gid,
@@ -33,12 +33,28 @@ Router.post('/', async(req, res) => {
 })
 
 // 查询某用户购物车
-Router.get('/', async(req, res) => {
+Router.get('/', async (req, res) => {
     let {
         username
     } = req.query;
     let result = await mongo.find(colName, {
         username
+    });
+    result = formatData({
+        data: result
+    });
+    res.send(result);
+})
+
+// 购物车删除功能
+Router.delete('/', async (req, res) => {
+    let {
+        username,
+        gid
+    } = req.body;
+    let result = await mongo.remove(colName, {
+        username,
+        gid
     });
     result = formatData({
         data: result
