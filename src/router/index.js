@@ -10,7 +10,7 @@ import Login from '../pages/Login.vue';
 import List from '../pages/List.vue';
 import Detail from '../pages/Detail.vue';
 let router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: [{
             name: 'home',
             path: '/home',
