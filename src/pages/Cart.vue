@@ -66,7 +66,7 @@ export default {
           }
         }
       }
-      await this.$axios.post("http://localhost:8827/carts/delete", {
+      await this.$axios.post("http://127.0.0.1:8827/carts/delete", {
         username: getCookie("username"),
         gid
       });
@@ -76,7 +76,7 @@ export default {
     async getCartNum(username) {
       let {
         data: { data }
-      } = await this.$axios.get("http://localhost:8827/carts", {
+      } = await this.$axios.get("http://127.0.0.1:8827/carts", {
         params: {
           username
         }
@@ -86,7 +86,7 @@ export default {
     async getCartDate(gid) {
       let {
         data: { data }
-      } = await this.$axios.post("http://localhost:8827/goods/main", {
+      } = await this.$axios.post("http://127.0.0.1:8827/goods/main", {
         gid
       });
       return data;

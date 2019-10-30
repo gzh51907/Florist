@@ -75,7 +75,7 @@ export default {
     async getDetailData(id) {
       let {
         data: { data }
-      } = await this.$axios.post("http://localhost:8827/goods/main", {
+      } = await this.$axios.post("http://127.0.0.1:8827/goods/main", {
         gid: id
       });
       return data;
@@ -95,7 +95,7 @@ export default {
       if (username) {
         let {
           data: { data }
-        } = await this.$axios.get("http://localhost:8827/carts/check", {
+        } = await this.$axios.get("http://127.0.0.1:8827/carts/check", {
           params: {
             username,
             gid: this.$route.params.id
@@ -103,7 +103,7 @@ export default {
         });
         if (data.length) {
           var num = data[0].num + 1;
-          await this.$axios.post("http://localhost:8827/carts/edit", {
+          await this.$axios.post("http://127.0.0.1:8827/carts/edit", {
             username,
             gid: this.$route.params.id,
             num
@@ -113,7 +113,7 @@ export default {
             this.$router.push("/cart");
           }
         } else {
-          await this.$axios.post("http://localhost:8827/carts", {
+          await this.$axios.post("http://127.0.0.1:8827/carts", {
             username,
             gid: this.$route.params.id,
             num: 1
@@ -142,7 +142,7 @@ export default {
       if (username) {
         let {
           data: { data }
-        } = await this.$axios.get("http://localhost:8827/carts/check", {
+        } = await this.$axios.get("http://127.0.0.1:8827/carts/check", {
           params: {
             username,
             gid: this.$route.params.id
@@ -150,14 +150,14 @@ export default {
         });
         if (data.length) {
           var num = data[0].num + 1;
-          await this.$axios.post("http://localhost:8827/carts/edit", {
+          await this.$axios.post("http://127.0.0.1:8827/carts/edit", {
             username,
             gid: this.$route.params.id,
             num
           });
           this.$router.push("/cart");
         } else {
-          await this.$axios.post("http://localhost:8827/carts", {
+          await this.$axios.post("http://127.0.0.1:8827/carts", {
             username,
             gid: this.$route.params.id,
             num: 1
