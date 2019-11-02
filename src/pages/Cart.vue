@@ -7,13 +7,13 @@
     </el-header>
     <el-main>
       <div class="card" v-for="item in dataCart" :key="item.gid">
-        <el-checkbox></el-checkbox>
-        <img :src="item.imgurl" />
+        <!-- <el-checkbox></el-checkbox> -->
+        <img :src="item.imgurl" @click="goto(item.gid)" />
         <div class="info">
           <section class="title">{{item.goods_name}}</section>
           <section class="num">
             数量：
-            <el-input-number v-model="item.num" @change="changeQty(item.id,$event)"></el-input-number>
+            <el-input-number v-model="item.num" :min="1" @change="changeQty(item.id,$event)"></el-input-number>
           </section>
           <section class="price">
             单价:
@@ -27,15 +27,15 @@
     </el-main>
     <el-footer height="40px">
       <div class="foot-l">
-        <el-checkbox>全选</el-checkbox>
+        <!-- <el-checkbox>全选</el-checkbox> -->
         <span>
           合计:
-          <em>￥</em>
+          <em>￥{{totalPrice}}</em>
         </span>
       </div>
       <button class="foot-r">
         去结算
-        <span>0</span>
+        <span>{{num}}</span>
       </button>
     </el-footer>
   </el-container>
@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       dataCart: []
+      // num: this.dataCart.length
     };
   },
   methods: {
@@ -54,7 +55,12 @@ export default {
       this.$router.push("/home");
     },
     handleChange() {},
-
+    goto(id) {
+      this.$router.push({
+        name: "detail",
+        params: { targetUrl: this.$route.path, id }
+      });
+    },
     async remove(gid) {
       function getCookie(key) {
         var cookies = document.cookie;
@@ -92,7 +98,15 @@ export default {
       return data;
     }
   },
-  computed: {},
+  computed: {
+    totalPrice() {
+      let total = 0;
+      this.dataCart.forEach(item => {
+        total += item.sell_price * item.num;
+      });
+      return total;
+    }
+  },
   async created() {
     function getCookie(key) {
       var cookies = document.cookie;
